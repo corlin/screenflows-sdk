@@ -11,13 +11,18 @@
 ```js
 screenflows.track(name, props)   // 自定义事件，如 track('add_to_cart', { sku: 'A1001' })
 screenflows.identify(id)         // 登录 / 注册成功后调用，关联站内用户 id（请传匿名/哈希后的 id，不要传手机号、邮箱）
-screenflows.page()               // 手动触发一次页面浏览（自动采集已覆盖 SPA 路由，一般不需要）
+screenflows.page(path?)          // 手动记录页面浏览；传 '/login' 这类路径时记录虚拟页面（原地显示的登录框、弹窗等）
 screenflows.consent(true|false)  // 配合 data-consent="required" 使用
 screenflows.optOut()             // 访客选择退出（写入 sf_optout，不再采集）
 screenflows.optIn()              // 取消退出
 ```
 
-页面未加载完之前调用的 API 会进入队列，SDK 就绪后自动补执行。
+页面未加载完之前调用的 API 会进入队列，SDK 就绪后自动补执行。也可以在页面加载后再插入脚本（不影响首屏），之前的调用先放进队列：
+
+```js
+window.screenflows = window.screenflows || { q: [] };
+screenflows.q.push(['page', '/login']);   // sf.js 加载后自动补发
+```
 
 ## 身份合并
 

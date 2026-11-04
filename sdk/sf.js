@@ -1,4 +1,4 @@
-/*! ScreenFlows sf.js v1.1.0 | (c) ScreenFlows | MIT License
+/*! ScreenFlows sf.js v1.2.0 | (c) ScreenFlows | MIT License
  * 源码公开，服务端点由 screenflows.dev 提供。
  * 用法见同目录的 README.md。
  */
@@ -31,7 +31,7 @@ function pageview(){var u=w.location.href;if(u===lastUrl)return;var ref=lastUrl|
 function clean(props){var o={},n=0;if(props&&typeof props==="object")for(var k in props){if(n>=20)break;var v=props[k];if(typeof v==="string"||typeof v==="number"||typeof v==="boolean"){o[k]=v;n++}}return o}
 var api={_v:1,
 track:function(name,props){if(typeof name==="string"&&name)push({type:"event",name:name.slice(0,300),props:clean(props)})},
-page:function(){lastUrl=null;pageview()},
+page:function(path){if(typeof path==="string"&&path.charAt(0)==="/"&&path.charAt(1)!=="/"){var u=w.location.origin+path.slice(0,500);if(u===lastUrl)return;var ref=lastUrl||d.referrer||"";lastUrl=u;push({type:"pageview",url:u,ref:ref})}else{lastUrl=null;pageview()}},
 identify:function(id){if(id){id=String(id).slice(0,128);var prev=ls.get("sf_user");ls.set("sf_user",id);if(prev!==id)push({type:"identify"})}else{ls.del("sf_user")}},
 consent:function(ok){consent=ok?"1":"0";ls.set("sf_consent",consent);if(ok&&autoPv){lastUrl=null;pageview()}},
 optOut:function(){ls.set("sf_optout","1");q.length=0},
