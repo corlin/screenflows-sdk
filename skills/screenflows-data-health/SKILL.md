@@ -16,7 +16,8 @@ description: ScreenFlows 数据与配置体检（面向平台管理员）：检�
 3. **页面字典覆盖**：`get_flow`（`max_edges: 5`）中 `label` 与 `page` 相同、看起来像原始路由或事件名（如 `/xxx/123`、英文事件名）的页面，通常是页面字典没有配置。按访问量排序列出。
 4. **漏斗配置**：`get_funnel` 报错"步骤在数据中不足"时，列出缺失的步骤，提示核对 `project.json` 的 `funnel.steps` 与实际埋点名称。
 5. **转化目标**：`get_overview` 的 `convertedSessions` 为 0 或极少时，提示核对 `goal.page` 是否与实际事件一致。
-6. **入口合理性**：`get_behavior`（`analysis: "entry"`）中，如果大量会话从深层页面或异常页面开始，提示可能存在埋点缺失（落地页没记录）。
+6. **旅程骨架是否已确认**（导入 / 实时接入的项目）：`get_journey` 的 `semanticStatus.goalConfirmed` 为 false 时，转化目标与阶段仍是自动推测的草稿，标为 `provisional` 的痛点不能作为结论；提示管理员在网页旅程地图顶部「确认目标与阶段」。`stagesConfirmed` 为 false 只说明页面归属按规则自动划分，可提示在业务语义配置中核对。
+7. **入口合理性**：`get_behavior`（`analysis: "entry"`）中，如果大量会话从深层页面或异常页面开始，提示可能存在埋点缺失（落地页没记录）。
 
 ## 输出格式
 
