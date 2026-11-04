@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "screenflows": {
+      "type": "http",
+      "url": "https://screenflows.caifu.social/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SCREENFLOWS_TOKEN}"
+      }
+    }
+  }
+}
