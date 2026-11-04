@@ -66,7 +66,8 @@ claude mcp add --transport http screenflows https://screenflows.dev/mcp \
 | `diagnose_page` | 单页诊断与干预方案 |
 | `simulate_intervention` | 降低某页离开率后的转化推演（模型估算） |
 | `get_behavior` | 访问时段 / 入口来源 / 新用户逐周 / 板块占比 / 典型路径 |
-| `get_import_spec` | 数据接入规范：离线文件的字段、列名别名、时间格式、隐私规则与示例模板，以及实时接入（服务端上报接口、网页采集脚本）的用法 |
+| `get_lifecycle` | 用户停在哪一步：沿漏斗按用户统计最远步骤、停留人数、仍活跃 / 已沉默、停留天数与停下前的动作（回答「注册后卡在哪一步」） |
+| `get_import_spec` | 数据接入规范：离线文件的字段、列名别名、时间格式、隐私规则与示例模板，实时接入的用法，以及推荐事件规范（标准事件名、中文名、所属环节、身份合并与命名规则） |
 | `list_imports` | 所在组织最近的离线导入与状态（待确认 / 已导入 / 失败原因） |
 
 所有分析工具都支持 `from` / `to`（YYYY-MM-DD，按会话开始日期）与 `segment`；结果附带 `dataQuality`，样本不足时不应下结论。

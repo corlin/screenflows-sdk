@@ -10,7 +10,7 @@
 
 ```js
 screenflows.track(name, props)   // 自定义事件，如 track('add_to_cart', { sku: 'A1001' })
-screenflows.identify(id)         // 关联登录用户（请传站内匿名/哈希后的 id，不要传手机号、邮箱）
+screenflows.identify(id)         // 登录 / 注册成功后调用，关联站内用户 id（请传匿名/哈希后的 id，不要传手机号、邮箱）
 screenflows.page()               // 手动触发一次页面浏览（自动采集已覆盖 SPA 路由，一般不需要）
 screenflows.consent(true|false)  // 配合 data-consent="required" 使用
 screenflows.optOut()             // 访客选择退出（写入 sf_optout，不再采集）
@@ -18,6 +18,27 @@ screenflows.optIn()              // 取消退出
 ```
 
 页面未加载完之前调用的 API 会进入队列，SDK 就绪后自动补执行。
+
+## 身份合并
+
+- 未登录时用这台设备的匿名 id（`sf_uid`）。登录后调用 `identify(用户 id)`：之后的事件以用户 id 上报，并带上设备匿名 id（`aid`），同时上报一条 `$identify` 关联事件
+- ScreenFlows 合并数据时，把这台设备登录前的浏览归到该用户名下；同一用户在多台设备上调用 `identify` 传同一 id，会合并为同一人
+- 服务端上报时，在事件里加 `anonymous_id`（登录前的匿名 id）即可建立同样的关联
+
+## 推荐事件名
+
+关键节点建议使用标准事件名（ScreenFlows 会自动识别中文名、旅程阶段、转化目标与漏斗），例如：
+
+```js
+screenflows.track('signup_started');
+screenflows.identify('u_8f3a2c');
+screenflows.track('signup_completed', { method: 'email' });
+screenflows.track('onboarding_completed');
+screenflows.track('checkout_started', { plan: 'pro' });
+// 付款成功、注册完成等以服务端结果为准的事件，建议从服务端上报 payment_succeeded
+```
+
+完整清单（通用主线、互动事件与各行业事件）在 ScreenFlows 后台「数据接入 → 实时接入 → 推荐事件规范」，或通过 MCP 工具 `get_import_spec` 的 `eventSpec` 获取。
 
 ## script 标签属性
 
