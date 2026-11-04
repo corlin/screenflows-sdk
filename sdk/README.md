@@ -11,7 +11,7 @@
 ```js
 screenflows.track(name, props)   // 自定义事件，如 track('add_to_cart', { sku: 'A1001' })
 screenflows.identify(id)         // 登录 / 注册成功后调用，关联站内用户 id（请传匿名/哈希后的 id，不要传手机号、邮箱）
-screenflows.page(path?)          // 手动记录页面浏览；传 '/login' 这类路径时记录虚拟页面（原地显示的登录框、弹窗等）
+screenflows.page(path?, {title?}) // 手动记录页面浏览；传 '/login' 这类路径时记录虚拟页面（原地显示的登录框、弹窗等）；title 为页面名称
 screenflows.consent(true|false)  // 配合 data-consent="required" 使用
 screenflows.optOut()             // 访客选择退出（写入 sf_optout，不再采集）
 screenflows.optIn()              // 取消退出
@@ -23,6 +23,15 @@ screenflows.optIn()              // 取消退出
 window.screenflows = window.screenflows || { q: [] };
 screenflows.q.push(['page', '/login']);   // sf.js 加载后自动补发
 ```
+
+## 页面名称
+
+页面浏览会带上页面标题（`document.title`；单页应用在路由切换、页面渲染后读取）。ScreenFlows 按路由取最常见的标题、去掉站名后作为页面的默认名称，所以页面标题写清楚（如「价格方案 | 你的网站」）就不用再手动配置页面字典。
+
+- 虚拟页面或标题不准确时，用 `screenflows.page('/login', { title: '登录' })` 直接给名称（可以传当前语言的文案）
+- 没有标题的页面与事件按中英文词典翻译（`/designs/new` → 新建设计、`inventory_added` → 添加库存）
+- 实时数据里新出现的页面自动命名后，在旅程地图上提示「待确认」
+- 页面标题里不要放手机号、邮箱等个人信息
 
 ## 身份合并
 
