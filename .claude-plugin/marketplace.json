@@ -1,1 +1,17 @@
-{"name":"screenflows-marketplace","owner":{"name":"ScreenFlows"},"plugins":[{"description":"ScreenFlows 客户旅程分析：远程 MCP 工具（漏斗、流转、步骤时机、行为洞察、页面诊断与推演）与分析 / 优化 Skill","name":"screenflows","source":"./"}]}
+{
+  "name": "screenflows-marketplace",
+  "owner": {
+    "name": "ScreenFlows"
+  },
+  "metadata": {
+    "description": "ScreenFlows 官方插件市场：客户旅程分析 MCP 与 Skill"
+  },
+  "plugins": [
+    {
+      "description": "ScreenFlows 客户旅程分析：远程 MCP 工具（漏斗、流转、步骤时机、行为洞察、页面诊断与推演）与分析 / 优化 Skill",
+      "name": "screenflows",
+      "source": "./",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ description: ScreenFlows 数据与配置体检（面向平台管理员）：检�
 
 对 `list_projects` 返回的每个项目（或用户指定的项目）：
 
-1. **数据时效**：`dataRange.to` 距今天数。超过 3 天提示数据可能未同步（D1 同步默认关闭，数据是镜像内的快照）。
+1. **数据时效**：`dataRange.to` 距今天数。超过 3 天提示数据可能未同步：内置示例项目不同步，属正常；在线同步或实时接入的项目每小时更新，滞后说明接入可能中断。
 2. **样本与会话质量**：`get_overview` 的 `dataQuality`（样本等级、会话数）；`get_step_timing` 的 `medianSessionLength` 与 `shortSessionsNote`。一半以上会话只有 1 步时，说明路径类分析参考价值有限，可能是埋点只记录了落地页，或会话切分过细。
 3. **页面字典覆盖**：`get_flow`（`max_edges: 5`）中 `label` 与 `page` 相同、看起来像原始路由或事件名（如 `/xxx/123`、英文事件名）的页面，通常是页面字典没有配置。按访问量排序列出。
 4. **漏斗配置**：`get_funnel` 报错"步骤在数据中不足"时，列出缺失的步骤，提示核对 `project.json` 的 `funnel.steps` 与实际埋点名称。

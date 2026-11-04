@@ -34,7 +34,8 @@ export SCREENFLOWS_TOKEN=<你的个人令牌>  # 在 screenflows.dev 右上角�
 ```
 
 ```
-/plugin install screenflows --marketplace corlin/screenflows-sdk
+/plugin marketplace add corlin/screenflows-sdk
+/plugin install screenflows@screenflows-marketplace
 ```
 
 或只接 MCP，见 `integrations-guide.md`。

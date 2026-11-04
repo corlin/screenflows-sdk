@@ -2,10 +2,10 @@
 
 ScreenFlows 提供远程 MCP 服务，让 Claude Code、Cursor 等工具直接调用平台的分析能力；在此之上提供 5 个 Skill，把常用的分析与优化流程固化下来。
 
-- **MCP 地址**：`https://screenflows.caifu.social/mcp`（Streamable HTTP，无状态）
+- **MCP 地址**：`https://screenflows.dev/mcp`（Streamable HTTP，无状态）
 - **鉴权**：`Authorization: Bearer <个人令牌>`。令牌在网页右上角「MCP 令牌」中生成，只显示一次；可设有效期、随时吊销，网页会显示最近使用时间。
 - **租户隔离**：令牌代表你的账号，工具只能访问你所在组织的项目（`list_projects` 只返回这些项目）。
-- **权限**：第一版工具全部只读。令牌分「只读分析 / 管理」两级，管理级只有管理员账号能创建（`pnpm auth:user role <email> admin`），为后续管理类工具预留。
+- **权限**：第一版工具全部只读。令牌分「只读分析 / 管理」两级，管理级只有组织管理员能创建，为后续管理类工具预留。
 
 ## 接入
 
@@ -15,18 +15,19 @@ ScreenFlows 提供远程 MCP 服务，让 Claude Code、Cursor 等工具直接�
 export SCREENFLOWS_TOKEN=sfk_xxx   # 写进 ~/.zshrc 等，让 Claude Code 能读到
 ```
 
-然后在 Claude Code（2.1.275 及以上）中执行：
+然后在 Claude Code 中添加插件市场并安装：
 
 ```
-/plugin install screenflows --marketplace corlin/screenflows-sdk
+/plugin marketplace add corlin/screenflows-sdk
+/plugin install screenflows@screenflows-marketplace
 ```
 
-本仓库已公开，直接安装即可。插件会注册 `screenflows` MCP 服务（令牌从 `SCREENFLOWS_TOKEN` 读取），并安装下面的 Skill。
+插件来自公开仓库 [corlin/screenflows-sdk](https://github.com/corlin/screenflows-sdk)。插件会注册 `screenflows` MCP 服务（令牌从 `SCREENFLOWS_TOKEN` 读取），并安装下面的 Skill。
 
 ### Claude Code：只接 MCP
 
 ```bash
-claude mcp add --transport http screenflows https://screenflows.caifu.social/mcp \
+claude mcp add --transport http screenflows https://screenflows.dev/mcp \
   --header "Authorization: Bearer sfk_xxx"
 ```
 
@@ -38,7 +39,7 @@ claude mcp add --transport http screenflows https://screenflows.caifu.social/mcp
 {
   "mcpServers": {
     "screenflows": {
-      "url": "https://screenflows.caifu.social/mcp",
+      "url": "https://screenflows.dev/mcp",
       "headers": { "Authorization": "Bearer sfk_xxx" }
     }
   }

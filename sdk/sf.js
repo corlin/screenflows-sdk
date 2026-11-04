@@ -1,6 +1,6 @@
 /*! ScreenFlows sf.js v1.0.0 | (c) ScreenFlows | MIT License
- * 源码公开，CDN 服务端点由 screenflows.dev 提供。
- * 用法见 ../sdk/README.md（或 https://screenflows.dev 的接入文档）。
+ * 源码公开，服务端点由 screenflows.dev 提供。
+ * 用法见同目录的 README.md。
  */
 (function(w,d){"use strict";
 if(w.screenflows&&w.screenflows._v)return;

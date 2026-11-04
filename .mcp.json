@@ -2,7 +2,7 @@
   "mcpServers": {
     "screenflows": {
       "type": "http",
-      "url": "https://screenflows.caifu.social/mcp",
+      "url": "https://screenflows.dev/mcp",
       "headers": {
         "Authorization": "Bearer ${SCREENFLOWS_TOKEN}"
       }
